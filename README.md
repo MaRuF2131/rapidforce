@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cleanInput = $validator->text($_POST['field']);
     // Business logic...
 }
-```php
+```
 ## 2. Security First Approach 🔒
 
 - Implemented input validation class (`admin_input_test.php`)  
@@ -76,7 +76,7 @@ fetch('profile.php', {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({id: volunteerId, name: volunteerName})
 })
-
+```
 ---
 ### Custom UI Toolkit 🛠️
 
@@ -212,6 +212,7 @@ Requirements
 - Learning progression
 
 - Attention to security and performance
+
 
 
 
