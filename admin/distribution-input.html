@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+            background-color: #f4f7f6;
+        }
+
+        * {
+              -ms-overflow-style: none;  /* Internet Explorer 10+ */
+             scrollbar-width: none;  /* Firefox */
+        }
+       *::-webkit-scrollbar { 
+              display: none;  /* Safari and Chrome */
+           }
+          *{
+                box-sizing: border-box;
+                margin: 0px;
+               padding: 0px;
+         }
+        .first-table label{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: left;
+            align-items: center;
+        }
+       .first-table input,.first-table label{
+            height: 35px;
+            width:19%;
+            padding: 5px;
+            margin-bottom: 5px;
+            background-color:rgba(130, 242, 134,0.5);
+            border: none;
+            border-radius: 5px;
+        }
+        .first-table input:hover,.first-table label:hover{
+            background-color: #f4f7f6;
+        }
+        .first-table{
+            position:fixed;
+            top:0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-between;
+            align-items: center;
+            background-color:rgb(76, 175, 80);
+            height:auto;
+            width: 100%;
+            padding-top:25px;
+            padding-bottom:25px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .first-table input,.first-table label{
+            overflow: auto;
+        }
+         table{
+            width: 100%;
+            height: auto;
+            margin-top:88px;
+            border-collapse:separate;
+        }
+        td{
+            text-align: center;
+            background-color:transparent;
+            width:25%;
+            height:30px;
+        }
+        th{ 
+            position: sticky;
+            top:90px;
+            background-color:black;
+            text-align: center;
+            color: white;
+            width:25%;
+            height: 40px;
+            padding: 5px;
+        }
+        table input,table label{
+            display: flex;
+            flex-wrap: wrap;
+            overflow-y: auto;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color:transparent;
+            height:100%;
+            width:100%;
+            border: none;
+        }
+        table label{
+            cursor: pointer;
+        }
+        form span{
+            position: absolute;
+            left:98%;
+            color: red;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        tr{
+            background-color: white;
+        }
+        tr:nth-child(even){
+         background-color:rgba(239, 234, 234, 0.927);
+        }
+        tr:hover{
+            background-color:rgb(200, 215, 220);
+        }
+    </style>
+</head>
+<body>
+<form action="distribution.php" method="post" enctype="multipart/form-data">   
+ <div class="first-table">
+    <input type="text" id="text1" name="work_name" placeholder="Work name" required/>
+    <input type="text" id="text2" name="work_type"placeholder="Work type" required/>
+    <input type="text" id="text3" name="location"placeholder="Location" required/>
+    <input type="file" id="video" name="video[]" multiple accept="video/*" hidden/>
+    <label for="video" style="cursor:pointer" id="videochange">Work video</label>
+    <input type="date" id="text4" name="work_date"placeholder="Work date" required/>
+  </div>
+
+  <table class="second-table">  
+    <thead>
+      <tr>
+        <th>SERVICE</th>
+        <th>QUANTITY</th>
+        <th>COST</th>
+        <th>MONEY-RECIPT</th>
+    </tr>  
+    </thead>
+   <tbody> 
+
+  </tbody>
+  </table>
+   <span class="plas">+</span>
+   <input type="submit" value="submit" name="submit">   
+</form>
+  <script>
+  document.querySelector("#text1").addEventListener("keydown",function(event){
+    if (string_check(event.key)!=1) {
+                          event.preventDefault();
+                       }
+  })
+
+  document.querySelector("#text2").addEventListener("keydown",function(event){
+    if (string_check(event.key)!=1) {
+                          event.preventDefault();
+                       }
+  })
+
+  document.querySelector("#text3").addEventListener("keydown",function(event){
+    if (string_check(event.key)!=1) {
+                          event.preventDefault();
+                       }
+  })
+  document.querySelector("#text4").addEventListener("keydown",function(event){
+    if (string_check(event.key)!=1) {
+                          event.preventDefault();
+                       }
+  }) 
+
+ document.querySelector('#video').addEventListener('change', function() {
+    var label = this.nextElementSibling;
+    
+    // Check if files were selected
+    if (this.files.length > 0) {
+        let filenames = [];
+        let error=['type error on:'];
+        for (let i = 0; i < this.files.length; i++) {
+            let file = this.files[i].name;
+
+            if (video_check(this.files[i].type) === 1){
+                filenames.push(file); // Add valid file names to the array
+            } else {
+                error.push(i+1); // Add error message for invalid types
+            }
+        }
+        // Display the selected file names or error messages
+        if(error.length==1){label.textContent = filenames.join(', ');}
+        else{label.textContent = error.join(', ');}
+    } else {
+        label.textContent = 'Choose a video'; // Reset to placeholder when no file is selected
+    }
+});
+
+     /*document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('pageshow', function(event) {
+                console.log("Page show event fired. Persisted:", event.persisted);
+                if (event.persisted) {
+                    //restoreFileInput();
+                }
+            });
+        });*/
+      
+      let i=1;
+  document.querySelector(".plas").addEventListener("click",function(){
+    
+      const bd = document.querySelector('tbody');
+            var row = document.createElement('tr');
+             var cell1= document.createElement('td');
+             var cell2= document.createElement('td');
+             var cell3= document.createElement('td');
+             var cell4= document.createElement('td');
+                 cell4.id="money"+i;
+                 cell4.hidden=1;
+             var cell5= document.createElement('td');
+
+             var cell1_value=document.createElement("input")
+             var cell2_value=document.createElement("input")
+             var cell3_value=document.createElement("input")
+             var cell4_value=document.createElement("input")
+             var cell5_value=document.createElement("label")
+          
+            cell1_value.type='text';
+            cell1_value.name='service'+i;
+            cell1_value.required=1;
+            cell1_value.placeholder='service';
+            cell1_value.addEventListener("keydown",function(event){    
+                     if (string_check(event.key)!=1) {
+                          event.preventDefault();
+                       }
+                      })
+
+            cell2_value.type='text';
+            cell2_value.name='quantity'+i;
+            cell2_value.required=1;
+            cell2_value.placeholder='quantity';
+            cell2_value.addEventListener("keydown",function(event){    
+                     if (string_check( event.key)!=1) {
+                          event.preventDefault();
+                       }
+                      })
+
+            cell3_value.type='number';
+            cell3_value.name='cost'+i;
+            cell3_value.required=1;
+            cell3_value.min=0;
+            cell3_value.placeholder='cost';
+            cell3_value.addEventListener("keydown",function(event){    
+                     if (number_check(event.key)!=1||event.key===' ') {
+                          event.preventDefault();
+                       }
+                      })
+
+            cell5_value.setAttribute('for',"money-recipt"+i);
+            cell5_value.textContent="money-recipt";
+
+            cell4_value.type='file';
+            cell4_value.name='file'+i+'[]';
+            cell4_value.multiple=1;
+            cell4_value.accept="image/*";
+            cell4_value.id="money-recipt"+i;
+            cell4_value.required=1;
+            cell4_value.addEventListener("change",function(){
+
+                              let filenames = [];
+                              let error=['type error on:'];
+                    if (cell4_value.files.length > 0) {
+                            for (let i = 0; i < this.files.length; i++) {
+                                      let file = this.files[i].name;
+
+                                     if (img_check(this.files[i].type) === 1){
+                                              filenames.push(file); // Add valid file names to the array
+                                        } else {
+                                           error.push(i+1); // Add error message for invalid types
+                                           }
+                                 }
+
+                             if(error.length==1){cell5_value.textContent = filenames.join(', ');}
+                                else{cell5_value.textContent = error.join(', ');}
+                        }
+                else {
+                    cell5_value.textContent= "No file selected";
+                    }
+           })
+
+
+            cell1.appendChild(cell1_value);
+            cell2.appendChild(cell2_value);
+            cell3.appendChild(cell3_value);
+            cell4.appendChild(cell4_value);
+            cell5.appendChild(cell5_value);
+
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            row.appendChild(cell3);
+            row.appendChild(cell4);
+            row.appendChild(cell5);
+
+            bd.appendChild(row);
+            i++;
+        });
+
+
+function video_check( data){
+   let val=String(data.toLowerCase());
+    const validTypes = ['video/mp4','video/mov','video/avi','video/wmv','video/avchd','video/webm','video/mkv'];
+            if (!(validTypes.includes(val))) {
+                return 0;
+            }
+            else{
+                return 1;
+            }
+}
+
+function img_check( data){
+    let val=String(data.toLowerCase());
+    const validTypes = ['image/jpeg', 'image/png', 'image/gif','image/jpg'];
+            if (!(validTypes.includes(val))) {
+                return 0;
+            }
+            else{
+                return 1;
+            }
+}
+function string_check( data){
+        let val=String(data);
+        let re = /['":;<>?]/i;
+            if (val.match(re)!=null){
+                return 0;
+            }
+            else {
+              return 1;
+            }
+      }
+
+      function number_check( data){
+        let val=String(data);
+        let re = /[^0-9.]/i;
+            if ((val.match(re)!=null&&val!="Backspace")||val.length<0) {
+                return 0;
+            }
+            else{
+              return 1;
+            }
+   }
+
+
+  </script>
+</body>
+</html>

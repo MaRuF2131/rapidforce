@@ -1,0 +1,42 @@
+
+<head>
+<style>
+
+        .letter {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1020;
+            font-size: 50px;
+            opacity: 0; /* Start invisible */
+            transition:transform 0.1s ease, opacity 0.2s ease;
+        }
+        .bln{
+            position:fixed;
+            top:5px;
+            left:5px;
+            z-index:1020;
+            height:50px;
+            width:150px;
+            background-color: aqua;
+            font-size: 50px;
+            border-radius: 5px;
+            user-select: none;
+            touch-action: none;
+        }
+    </style>
+</head>
+    <div class="bln"></div>
+    <div class="mgc">
+    <span class="letter">S</span>
+    <span class="letter">u</span>
+    <span class="letter">d</span>
+    <span class="letter">i</span>
+    <span class="letter">p</span>
+    <span class="letter">t</span>
+    <span class="letter">o</span>
+    </div>
+    <script src="rezise and move tool\tool.js"></script>
+    <script>
+        make_move(".bln",".bln",true)
+    </script>

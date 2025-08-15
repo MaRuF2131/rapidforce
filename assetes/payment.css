@@ -1,0 +1,102 @@
+
+.bkash form, .courier form{
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+  padding: 20px;
+  justify-content:center;
+
+}
+.courier, .bkash{
+  container-type: inline-size;
+  container-name: change;
+  display: flex;
+  flex-wrap: wrap;
+  width:min(1800px,95%);
+  padding: 10px;
+  animation:scrollpayment both;
+  animation-timeline:view(0% -30%);
+}
+
+.courier form{
+  margin-top: 30px;
+}
+
+.payment,.payment2{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  background-color: white/*rgba(255, 255, 255,0.95)*/;
+  align-content: center;
+  justify-content: center;
+}
+
+.bkash{
+  background-color:rgb(209, 207, 207);
+  margin-top: 10px;
+}
+.courier{
+  background-color:rgb(209, 207, 207);
+}
+
+@keyframes scrollpayment{
+
+  0%{
+    opacity: 0; transform:scale(.5);
+  }
+  50%,70%{
+   opacity: 1; transform: scale(1);
+  }
+  100%{
+    opacity: 0.3;transform: scale(.5);
+  }
+}
+
+#a{
+  width:30%;
+  min-height: 35px;
+  text-align: center;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  background-color:#4ecc69;
+  border:none;
+  color:black;
+  font-weight: 800;
+}
+
+
+ #button{
+  width:min(155px,100%);
+  min-height: 35px;
+  background-color:aqua;
+  text-align: center;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border:none;
+  font-weight: 800;
+  color: brown;
+  cursor:pointer;
+  transition:all .3s 
+}
+
+#a:hover{
+  background-color: rgba(255, 255, 255,0.95);
+}
+#button:hover{
+   transform:scale(1.2);
+   color: rgb(245, 76, 76);
+}
+
+@container change (width<925px) {
+  :is(.bkash form  , .courier form){
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  :is(#a){
+    width:min(300px,95%);
+  }
+}
