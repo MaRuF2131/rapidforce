@@ -35,7 +35,6 @@ RapidForce is a complete web-based management system built from scratch to coord
 ### Notable Implementation Patterns
 
 #### 1. Custom MVC-like Structure
-```php
 // Example of my controller-like approach
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $validator = new input_test\test();
@@ -211,5 +210,6 @@ Requirements
 - Learning progression
 
 - Attention to security and performance
+
 
 
