@@ -89,13 +89,13 @@ fetch('profile.php', {
 - Animated components without libraries
 
 - Responsive design with pure CSS
-
+```javascript
 function resize(magic) {
     magic.style.top = ((window.innerHeight - magic.offsetHeight)/2.0) + "px";
     magic.style.left = ((window.innerWidth - magic.offsetWidth)/2.0) + "px";
     // ... 85 lines of custom drag/resize logic
 }
-
+```
 ---
 
 ### Database Layer 🗄️
@@ -109,7 +109,7 @@ function resize(magic) {
 - Custom query builder patterns
 
 - Data validation before DB operations
-
+```php
 function database() {
     try {
         $conn = new PDO("mysql:host=$server;dbname=$database", $username, $password);
@@ -119,6 +119,7 @@ function database() {
         die("Connection failed: " . $e->getMessage());
     }
 }
+```
 
 ---
 ### What My Code Demonstrates 🧠
@@ -212,6 +213,7 @@ Requirements
 - Learning progression
 
 - Attention to security and performance
+
 
 
 
